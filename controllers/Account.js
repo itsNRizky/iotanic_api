@@ -31,6 +31,21 @@ const Account = {
       response.ok(acc,res)
     })
   },
+
+  getAccount: (req, res) => {
+    AccountModel.find((err, accs) => {
+      if (err){
+        response.failed({
+          value: null,
+          msg: `Error getting all accounts | Log: ${console.error(err)}`
+        }, res)
+      }
+
+      response.ok({
+        accounts: accs
+      }, res)
+    })
+  }
 }
 
 module.exports = Account
