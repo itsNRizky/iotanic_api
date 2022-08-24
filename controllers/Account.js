@@ -8,11 +8,17 @@ const Account = {
     let created_date = new Date()
 
     const model = new AccountModel({email, password, created_date})
-    model.save((err) => {
-      if (err){
-        response.failed(`Failed to create account! Log: ${console.error(err)}`, res)
+    AccountModel.findOne({email, password}, (err, acc) => {
+      if(acc){
+        response.ok(`Account is already registered`, res)
+      }else{
+        model.save((err) => {
+          if (err){
+            response.failed(`Failed to create account! Log: ${console.error(err)}`, res)
+          }
+          response.ok(`Success creating account!`, res)
+        })
       }
-      response.ok(`Success creating account!`, res)
     })
   },
 
