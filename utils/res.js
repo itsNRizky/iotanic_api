@@ -5,7 +5,7 @@ const response = {
       values: values
     }
     res.json(data)
-    res.end()
+    return res.end()
   },
   failed: (values, res) => {
     let data = {
@@ -13,7 +13,7 @@ const response = {
       values: values
     }
     res.json(data)
-    res.end()
+    return res.end()
   }
 }
 
