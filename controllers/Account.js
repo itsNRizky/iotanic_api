@@ -1,5 +1,7 @@
 const AccountModel = require('../models/Account')
+const ProfileModel = require('../models/Profile')
 const response = require('../utils/res')
+const Profile = require('../controllers/Profile')
 
 const Account = {
   signUp: (req, res) => {
@@ -8,7 +10,7 @@ const Account = {
     let created_date = new Date()
 
     const model = new AccountModel({email, password, created_date})
-    AccountModel.findOne({email, password}, (err, acc) => {
+    AccountModel.findOne({email}, (acc) => {
       if(acc){
         response.ok(`Account is already registered`, res)
       }else{
@@ -16,6 +18,7 @@ const Account = {
           if (err){
             response.failed(`Failed to create account! Log: ${console.error(err)}`, res)
           }
+          Profile.createProfile(model.id)
           response.ok(`Success creating account!`, res)
         })
       }
@@ -28,13 +31,17 @@ const Account = {
     
     AccountModel.findOne({email, password}, (err, acc) => {
       if (err){
-        response.failed({
-          value: null,
-          msg: `Error signin user | Log: ${err}`
-        }, res)
+        response.failed(`Error signin user | Log: ${err}`, res)
       }
-
-      response.ok(acc,res)
+      ProfileModel.findOne({account: acc._id}, (e, profile) => {
+        if (err){
+          response.failed(`Error getting user's profile | Log: ${console.error(e)}`)
+        }
+        response.ok({
+          account: profile,
+          msg: `Success signin`
+        }, res)
+      })
     })
   },
 
@@ -42,7 +49,7 @@ const Account = {
     AccountModel.find((err, accs) => {
       if (err){
         response.failed({
-          value: null,
+          accounts: null,
           msg: `Error getting all accounts | Log: ${console.error(err)}`
         }, res)
       }

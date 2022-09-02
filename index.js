@@ -28,7 +28,7 @@ app.post('/api/signup', Account.signUp)
 app.post('/api/signin', Account.signIn)
 app.get('/api/account', Account.getAccount)
 
-app.get('/api/profile/:id', Profile.getProfileByAcc)
+app.get('/api/profile/:id/', Profile.getProfileByAcc)
 app.post('/api/profile/create', Profile.createProfile)
 
 app.get('/api/device/create', Device.createDevice)
