@@ -2,22 +2,16 @@ const ProfileModel = require('../models/Profile')
 const response = require('../utils/res')
 const mongoose = require('mongoose')
 const Profile = {
-  createProfile: (req, res) => {
-    let name = req.body.name
-    let age = req.body.age
-    let account = mongoose.Types.ObjectId(req.body.account)
+  createProfile: (id) => { //digunakan di controller signup only
+    let name = 'Ubah Nama Anda'
+    let age = 0
+    let account = mongoose.Types.ObjectId(id)
     const model = new ProfileModel({name, age, account})
     model.save((err) => {
-      if (err) {
-        response.failed({
-          value: null,
-          msg: `Failed saving user's profile | Log: ${console.error(err)}`
-        }, res)
+      if (err){
+        return console.error(err)
       }
-      response.ok({
-        value: {name, age, account},
-        msg: `Success saving user's profile`
-      },res)
+      return console.log(model)
     })
   },
 
@@ -36,7 +30,7 @@ const Profile = {
         msg: `Success retrieving profile by Account ID: ${id}`
       }, res)
     })
-  }
+  }, 
 }
 
 module.exports = Profile
