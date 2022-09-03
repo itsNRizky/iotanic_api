@@ -1,6 +1,7 @@
 const Express = require('express')
 const bodyParser = require('body-parser')
 const responses = require('./utils/res')
+
 const cors = require('cors')
 require('./utils/db')
 
@@ -21,7 +22,7 @@ app.use(bodyParser.json())
 
 //===========Route===============
 app.get('/', (req, res) => {
-  responses.ok("IoTanic API works properly!", res)
+  res.send('App is working yeay!')
 })
 
 app.post('/api/signup', Account.signUp)
