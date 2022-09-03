@@ -37,6 +37,7 @@ const Account = {
         if (err){
           response.failed(`Error getting user's profile | Log: ${console.error(e)}`)
         }
+        profile.email = email
         response.ok({
           account: profile,
           msg: `Success signin`
