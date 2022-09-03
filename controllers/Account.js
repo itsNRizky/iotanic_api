@@ -9,11 +9,11 @@ const Account = {
     let password = req.body.password
     let created_date = new Date()
 
-    const model = new AccountModel({email, password, created_date})
-    AccountModel.findOne({email}, (acc) => {
+    AccountModel.find({email}, (e, acc) => {
       if(acc){
         response.ok(`Account is already registered`, res)
       }else{
+        const model = new AccountModel({email, password, created_date})
         model.save((err) => {
           if (err){
             response.failed(`Failed to create account! Log: ${console.error(err)}`, res)
