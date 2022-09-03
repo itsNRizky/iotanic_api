@@ -22,7 +22,7 @@ app.use(bodyParser.json())
 
 //===========Route===============
 app.get('/', (req, res) => {
-  res.send('App is working yeay!')
+  responses.ok("IoTanic API works properly!", res)
 })
 
 app.post('/api/signup', Account.signUp)
