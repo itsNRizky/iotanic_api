@@ -38,10 +38,10 @@ const Device = {
           msg: `Error getting the user | Log: ${console.error(err)}`
         }, res)
       }
-      if (device.get('user') != null){
+      if (device.user != null){
         response.ok({
           value: false,
-          msg: `Device already has the user with ID: ${device.get('user')}`
+          msg: `Device already has the user with ID: ${device.user}`
         }, res)
       } else{
         response.ok({
@@ -54,19 +54,27 @@ const Device = {
 
   setUser: (req, res) => {
     let deviceID = req.body.device
-    let userID = mongoose.Types.ObjectId(req.body.profile)
+    let deviceName = req.body.name
+    let profileID = mongoose.Types.ObjectId(req.body.profile)
 
-    DeviceModel.updateOne({_id: deviceID}, {user: userID}, (err) => {
+    DeviceModel.updateOne({_id: deviceID}, {user: profileID,  name: deviceName}, (err) => {
       if (err){
-        response.failed({
-          value: null,
-          msg: `Failed updating device's user ID: ${userID} | Log: ${console.error(err)}`
-        }, res)
+        response.failed(`Failed updating device's user ID: ${profileID} | Log: ${console.error(err)}`, res)
+      }
+
+      response.ok(`Success updating device's user`, res)
+    })
+  },
+
+  userDevices: (req, res) => {
+    let profileID = mongoose.Types.ObjectId(req.body.profile)
+    DeviceModel.find({user: profileID}, (err, dvcs) => {
+      if (err){
+        response.failed(`Failed getting user's device | Log: ${console.error(err)}`)
       }
 
       response.ok({
-        value: {deviceID, userID},
-        msg: `Success updating device's user`
+        devices: dvcs
       }, res)
     })
   },
