@@ -10,6 +10,7 @@ const Device = {
       n: 0, 
       p: 0, 
       k: 0,
+      ph: 0,
       datetime: new Date()
     }]
     const model = new DeviceModel({name, user, records})
