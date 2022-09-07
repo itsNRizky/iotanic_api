@@ -33,7 +33,7 @@ const Account = {
       if (err){
         response.failed(`Error signin user | Log: ${err}`, res)
       }
-      if (acc === null) response.ok({account: null})
+      if (acc === null) response.ok({account: null}, res)
       ProfileModel.findOne({account: acc._id}, (e, profile) => {
         if (e){
           response.failed(`Error getting user's profile | Log: ${console.error(e)}`)
