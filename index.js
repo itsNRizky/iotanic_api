@@ -37,7 +37,7 @@ app.post('/api/device/set', Device.setUser)
 app.post('/api/device/check', Device.checkNull)
 app.post('/api/device/', Device.userDevices)
 
-app.get('/api/records/:id/:n/:p/:k/:t', Device.saveRecords)
+app.get('/api/records/:id/:n/:p/:k/:ph/:t', Device.saveRecords)
 
 app.listen(port, () => {
   console.log(`API IoTanic | Listening http://localhost:${port}`)
