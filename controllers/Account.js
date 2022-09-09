@@ -9,7 +9,7 @@ const Account = {
     let password = req.body.password
     let created_date = new Date()
 
-    AccountModel.find({email}, (e, acc) => {
+    AccountModel.findOne({email}, (e, acc) => {
       if(acc){
         response.ok(`Account is already registered`, res)
       }else{
