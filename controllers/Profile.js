@@ -20,13 +20,13 @@ const Profile = {
     ProfileModel.findOne({account: id}, (err, profile) => {
       if (err){
         response.failed({
-          value: null,
+          profile: null,
           msg: `Could not retrieve profile by Account ID: ${id} | Log: ${console.error(err)}`
         }, res)
       }
 
       response.ok({
-        value: profile,
+        profile: profile,
         msg: `Success retrieving profile by Account ID: ${id}`
       }, res)
     })
