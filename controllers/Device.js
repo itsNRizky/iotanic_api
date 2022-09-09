@@ -35,18 +35,18 @@ const Device = {
     DeviceModel.findOne({_id: deviceID}, (err, device) => {
       if(err){
         response.failed({
-          value: null,
-          msg: `Error getting the user | Log: ${console.error(err)}`
+          available: null,
+          msg: `Error checking the device | Log: ${console.error(err)}`
         }, res)
       }
       if (device.user != null){
         response.ok({
-          value: false,
+          available: false,
           msg: `Device already has the user with ID: ${device.user}`
         }, res)
       } else{
         response.ok({
-          value: true,
+          available: true,
           msg: `Device doesn't have a user, user can register!`
         }, res)
       }
@@ -81,19 +81,19 @@ const Device = {
   },
 
   saveRecords: (req, res) => {
-    let {n, p, k, t} = req.params
+    let {n, p, k, ph, t} = req.params
     let id = mongoose.Types.ObjectId(req.params.id)
     
-    DeviceModel.updateOne({_id: id}, {$push: {records: {n,p,k,datetime: t}}}, (err) => {
+    DeviceModel.updateOne({_id: id}, {$push: {records: {n,p,k,ph,datetime: t}}}, (err) => {
       if (err){
         response.failed({
-          value: null,
+          record: null,
           msg: `Error saving records to ID: ${id} | Log: ${console.error(err)}`
         }, res)
       }
 
       response.ok({
-        value: {n,p,k,datetime: t},
+        record: {n,p,k,ph,datetime: t},
         msg: `Success saving records of ID: ${id}`
       }, res)
     })
