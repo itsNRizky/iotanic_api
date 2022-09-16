@@ -42,13 +42,13 @@ const Device = {
       if (device.user != null){
         response.ok({
           available: false,
-          device: null,
+          deviceID: null,
           msg: `Device already has the user with ID: ${device.user}`
         }, res)
       } else{
         response.ok({
           available: true,
-          device: deviceID,
+          deviceID: deviceID,
           msg: `Device doesn't have a user, user can register!`
         }, res)
       }
