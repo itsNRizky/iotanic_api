@@ -11,6 +11,7 @@ const Device = mongoose.model('Device', {
       n: Number,
       p: Number,
       k: Number,
+      ph: Number,
       datetime: Date
     }
   ]
