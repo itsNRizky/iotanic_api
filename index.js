@@ -34,6 +34,7 @@ app.get('/api/profile/:id/', Profile.getProfileByAcc)
 app.get('/api/device/create', Device.createDevice)
 app.post('/api/device/set', Device.setUser)
 app.post('/api/device/check', Device.checkNull)
+app.get('/api/device/:id', Device.getDevicebyID)
 app.post('/api/device/', Device.userDevices)
 
 app.get('/api/records/:id/:n/:p/:k/:ph/:t', Device.saveRecords)

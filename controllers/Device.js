@@ -35,7 +35,7 @@ const Device = {
     DeviceModel.findOne({_id: deviceID}, (err, device) => {
       if(err){
         response.failed({
-          available: null,
+          available: false,
           msg: `Error checking the device | Log: ${console.error(err)}`
         }, res)
       }
@@ -70,14 +70,26 @@ const Device = {
   },
 
   userDevices: (req, res) => {
-    let profileID = mongoose.Types.ObjectId(req.body.profile)
-    DeviceModel.find({user: profileID}, (err, dvcs) => {
+    DeviceModel.find({user: mongoose.Types.ObjectId(req.body.profile)}, (err, dvcs) => {
       if (err){
         response.failed(`Failed getting user's device | Log: ${console.error(err)}`)
       }
 
       response.ok({
         devices: dvcs
+      }, res)
+    })
+  },
+
+  getDevicebyID: (req, res) => {
+    let deviceID = mongoose.Types.ObjectId(req.params.id)
+    DeviceModel.find({_id: deviceID}, (err, dvc) => {
+      if (err){
+        response.failed(`Failed getting user device with ID: ${deviceID}`, res)
+      }
+
+      response.ok({
+        device: dvc,
       }, res)
     })
   },
