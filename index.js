@@ -30,6 +30,7 @@ app.post('/api/signin', Account.signIn)
 app.get('/api/account', Account.getAccount)
 
 app.get('/api/profile/:id/', Profile.getProfileByAcc)
+app.post('/api/profile', Profile.updateProfile)
 
 app.get('/api/device/create', Device.createDevice)
 app.post('/api/device/set', Device.setUser)

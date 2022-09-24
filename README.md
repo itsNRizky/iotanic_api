@@ -153,6 +153,34 @@ ERROR: {
 }
 ```
 
+### Profile updateProfile()
+
+Update the user's profile
+
+```http
+  POST /api/profile
+```
+
+| Body   | Type     | Description                                   |
+| :----- | :------- | :-------------------------------------------- |
+| `id`   | `String` | **Required** to check the \_id of the profile |
+| `name` | `String` | To update the profile's name                  |
+| `age`  | `Int`    | To udpate the profile's age                   |
+
+#### Response
+
+```javascript
+TRUE : {
+  status: 200,
+  values: `Success updating user profile with ID: ID`
+}
+
+ERROR : {
+  status: 400,
+  values: `Failed to update the user profile with ID: ID`
+}
+```
+
 ### Device createDevice()
 
 Create a template for device. Used by the developers. Use this when you need a new device id
@@ -291,17 +319,16 @@ ERROR: {
 Saving records from the device to databse
 
 ```http
-  GET /api/records/:id/:n/:p/:k/:ph/:t
+  GET /api/records/:id/:n/:p/:k/:ph
 ```
 
-| Parameter | Type     | Description                     |
-| :-------- | :------- | :------------------------------ |
-| `id`      | `String` | **Required** device \_id        |
-| `n`       | `Int32`  | **Required** value of n         |
-| `p`       | `Int32`  | **Required** value of p         |
-| `k`       | `Int32`  | **Required** value of k         |
-| `ph`      | `Int32`  | **Required** value of ph        |
-| `t`       | `Date`   | **Required** sensor's data date |
+| Parameter | Type     | Description              |
+| :-------- | :------- | :----------------------- |
+| `id`      | `String` | **Required** device \_id |
+| `n`       | `Int32`  | **Required** value of n  |
+| `p`       | `Int32`  | **Required** value of p  |
+| `k`       | `Int32`  | **Required** value of k  |
+| `ph`      | `Int32`  | **Required** value of ph |
 
 #### Response
 
