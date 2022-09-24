@@ -36,8 +36,9 @@ const Profile = {
     let id = req.body.id
     let name = req.body.name
     let age = req.body.age
+    let email = req.body.email
     console.log(age)
-    ProfileModel.updateOne({_id: id}, {_id: id, name, age}, (err) => {
+    ProfileModel.updateOne({_id: id}, {_id: id, name, age, email}, (err) => {
       if (err){
         response.failed(`Failed to update the user profile with id: ${id}`, res)
       }
