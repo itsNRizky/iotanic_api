@@ -95,7 +95,8 @@ const Device = {
   },
 
   saveRecords: (req, res) => {
-    let {n, p, k, ph, t} = req.params
+    let {n, p, k, ph} = req.params
+    let t = new Date()
     let id = mongoose.Types.ObjectId(req.params.id)
     
     DeviceModel.updateOne({_id: id}, {$push: {records: {n,p,k,ph,datetime: t}}}, (err) => {
